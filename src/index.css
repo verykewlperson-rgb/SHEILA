@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #e2e8f0 75%, #cbd5e1 100%);
+    min-height: 100vh;
+    color: #1f2937;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-8 border border-gray-100 transition-all duration-300 hover:shadow-premium;
+  }
+  
+  .btn-primary {
+    @apply bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-xl shadow-soft hover:shadow-premium transition-all duration-300 tracking-wide;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/90 hover:bg-white text-gray-700 font-medium py-3 px-8 rounded-xl border border-gray-200 shadow-soft hover:shadow-premium transition-all duration-300;
+  }
+  
+  .mic-button {
+    @apply w-16 h-16 rounded-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center shadow-premium border-2 border-white/60 transition-all duration-300;
+  }
+  
+  .mic-button.recording {
+    @apply bg-gray-800 animate-pulse-slow shadow-premium;
+  }
+  
+  .rank-badge {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold shadow-soft border border-gray-100 backdrop-blur-sm;
+  }
+  
+  .rank-bronze {
+    @apply bg-gray-600 text-white;
+  }
+  
+  .rank-silver {
+    @apply bg-gray-500 text-white;
+  }
+  
+  .rank-gold {
+    @apply bg-gray-700 text-white;
+  }
+  
+  .rank-diamond {
+    @apply bg-gray-800 text-white;
+  }
+  
+  .rank-champion {
+    @apply bg-gray-900 text-white;
+  }
+  
+  .glass {
+    @apply bg-white/90 backdrop-blur-sm shadow-soft border border-gray-100;
+  }
+  
+  .premium-card {
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-8 border border-gray-100 transition-all duration-300 hover:shadow-premium hover:bg-white;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  letter-spacing: 0.01em;
+  color: #1f2937;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+} 
