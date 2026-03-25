@@ -10,7 +10,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -34,15 +34,10 @@ const mainItems = [
   { title: "Profile", url: "/profile", icon: User },
 ];
 
-const bottomItems = [
-  { title: "Settings", url: "/settings", icon: Settings },
-  { title: "Logout", url: "/login", icon: LogOut },
-];
-
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Sidebar collapsible="icon" className="border-r border-border">
@@ -53,7 +48,7 @@ export function AppSidebar() {
               हिंदी सीखें
             </h1>
             <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1 border border-border px-2 py-0.5 bg-accent text-accent-foreground font-medium">
+              <span className="inline-flex items-center gap-1 border border-border px-2 py-0.5 bg-accent text-accent-foreground font-medium text-[10px] uppercase tracking-wider">
                 Bronze
               </span>
               <span>10 pts</span>
@@ -91,20 +86,29 @@ export function AppSidebar() {
 
       <SidebarFooter className="border-t border-border py-2">
         <SidebarMenu>
-          {bottomItems.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <NavLink
-                  to={item.url}
-                  className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-100"
-                  activeClassName="bg-accent text-foreground font-medium"
-                >
-                  <item.icon className="h-4 w-4 shrink-0" />
-                  {!collapsed && <span>{item.title}</span>}
-                </NavLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <NavLink
+                to="/profile"
+                className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-100"
+                activeClassName="bg-accent text-foreground font-medium"
+              >
+                <Settings className="h-4 w-4 shrink-0" />
+                {!collapsed && <span>Settings</span>}
+              </NavLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <button
+                onClick={() => navigate("/login")}
+                className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-100 w-full"
+              >
+                <LogOut className="h-4 w-4 shrink-0" />
+                {!collapsed && <span>Logout</span>}
+              </button>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
