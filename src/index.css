@@ -6,90 +6,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 10%;
+    --background: 200 6% 10%;
+    --foreground: 60 5% 85%;
 
-    --card: 0 0% 99%;
-    --card-foreground: 220 20% 10%;
+    --card: 200 5% 12%;
+    --card-foreground: 60 5% 85%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover: 200 5% 14%;
+    --popover-foreground: 60 5% 85%;
 
-    --primary: 222 47% 11%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 60 5% 85%;
+    --primary-foreground: 200 6% 10%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 200 4% 16%;
+    --secondary-foreground: 60 5% 75%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 200 4% 16%;
+    --muted-foreground: 60 3% 50%;
 
-    --accent: 220 14% 93%;
-    --accent-foreground: 220 20% 10%;
+    --accent: 200 4% 18%;
+    --accent-foreground: 60 5% 85%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 60 5% 95%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 222 47% 11%;
+    --border: 200 4% 20%;
+    --input: 200 4% 20%;
+    --ring: 60 5% 85%;
 
-    --radius: 0.125rem;
+    --radius: 0.25rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 220 20% 10%;
-    --sidebar-primary: 222 47% 11%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 220 14% 93%;
-    --sidebar-accent-foreground: 220 20% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 222 47% 11%;
-
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --info: 217 91% 60%;
-    --info-foreground: 0 0% 100%;
-  }
-
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 96%;
-
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 96%;
-
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 96%;
-
-    --primary: 210 40% 96%;
-    --primary-foreground: 222 47% 11%;
-
-    --secondary: 217 33% 14%;
-    --secondary-foreground: 210 40% 96%;
-
-    --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 55%;
-
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 96%;
-
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 212 27% 84%;
-
-    --sidebar-background: 222 47% 7%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 210 40% 96%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 14%;
-    --sidebar-accent-foreground: 210 40% 96%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 212 27% 84%;
+    --sidebar-background: 200 5% 11%;
+    --sidebar-foreground: 60 5% 85%;
+    --sidebar-primary: 60 5% 85%;
+    --sidebar-primary-foreground: 200 6% 10%;
+    --sidebar-accent: 200 4% 16%;
+    --sidebar-accent-foreground: 60 5% 85%;
+    --sidebar-border: 200 4% 18%;
+    --sidebar-ring: 60 5% 85%;
 
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
@@ -109,6 +63,21 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
 }
 
 @layer components {
@@ -125,10 +94,22 @@
   }
 
   .section-title {
-    @apply text-sm font-medium uppercase tracking-wider text-muted-foreground mb-4;
+    @apply text-xs font-medium uppercase tracking-widest text-muted-foreground mb-4;
   }
 
   .panel {
     @apply border border-border bg-card p-5;
+  }
+
+  .topbar-btn {
+    @apply flex items-center gap-1.5 border border-border px-3 py-1.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-100 cursor-pointer relative;
+  }
+
+  .dropdown-menu {
+    @apply absolute top-full right-0 mt-1 border border-border bg-card min-w-[180px] z-50 shadow-lg shadow-black/20;
+  }
+
+  .dropdown-item {
+    @apply px-4 py-2.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors cursor-pointer flex items-center gap-2;
   }
 }
