@@ -1,6 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Search, ChevronDown, Globe, Settings, User, LogOut, X } from "lucide-react";
+import { Search, ChevronDown, Globe, User, LogOut, X, Sun, Moon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,10 +18,17 @@ const searchItems = [
   { label: "Hear & Type", url: "/hear-and-type" },
   { label: "Pronouncer", url: "/pronouncer" },
   { label: "Profile", url: "/profile" },
-  { label: "Settings", url: "/profile" },
   { label: "Daily Goals", url: "/profile" },
   { label: "Progress", url: "/profile" },
 ];
+
+function getInitialTheme(): "dark" | "light" {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") return stored;
+  }
+  return "dark";
+}
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [langOpen, setLangOpen] = useState(false);
@@ -29,6 +36,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [selectedLang, setSelectedLang] = useState("Hindi");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">(getInitialTheme);
   const navigate = useNavigate();
   const langRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -47,6 +55,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("light", theme === "light");
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
 
   return (
     <SidebarProvider>
@@ -101,6 +117,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
+              <button
+                className="topbar-btn"
+                onClick={toggleTheme}
+                title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+              </button>
+
               {/* Language Selector */}
               <div ref={langRef} className="relative">
                 <button className="topbar-btn" onClick={() => { setLangOpen(!langOpen); setProfileOpen(false); }}>
@@ -125,15 +150,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 )}
               </div>
 
-              {/* Settings */}
-              <button
-                className="topbar-btn"
-                onClick={() => navigate("/profile")}
-                title="Settings"
-              >
-                <Settings className="h-3.5 w-3.5" />
-              </button>
-
               {/* Profile */}
               <div ref={profileRef} className="relative">
                 <button
@@ -149,10 +165,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                       <p className="text-xs text-muted-foreground">user@example.com</p>
                     </div>
                     <div className="dropdown-item" onClick={() => { navigate("/profile"); setProfileOpen(false); }}>
-                      <User className="h-3.5 w-3.5" /> Profile
-                    </div>
-                    <div className="dropdown-item" onClick={() => { navigate("/profile"); setProfileOpen(false); }}>
-                      <Settings className="h-3.5 w-3.5" /> Settings
+                      <User className="h-3.5 w-3.5" /> Profile & Settings
                     </div>
                     <div className="border-t border-border">
                       <div className="dropdown-item text-destructive" onClick={() => { navigate("/login"); setProfileOpen(false); }}>

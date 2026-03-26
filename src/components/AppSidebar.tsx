@@ -6,7 +6,6 @@ import {
   Headphones,
   Volume2,
   User,
-  Settings,
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
@@ -86,18 +85,6 @@ export function AppSidebar() {
 
       <SidebarFooter className="border-t border-border py-2">
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <NavLink
-                to="/profile"
-                className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-100"
-                activeClassName="bg-accent text-foreground font-medium"
-              >
-                <Settings className="h-4 w-4 shrink-0" />
-                {!collapsed && <span>Settings</span>}
-              </NavLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <button
