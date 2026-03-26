@@ -9,6 +9,7 @@ import Pronouncer from "./pages/Pronouncer";
 import HearAndType from "./pages/HearAndType";
 import Mistakes from "./pages/Mistakes";
 import Dueling from "./pages/Dueling";
+import DuelingChallenge from "./pages/DuelingChallenge";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/hear-and-type" element={<HearAndType />} />
           <Route path="/mistakes" element={<Mistakes />} />
           <Route path="/dueling" element={<Dueling />} />
+          <Route path="/dueling/challenge/:id" element={<DuelingChallenge />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
